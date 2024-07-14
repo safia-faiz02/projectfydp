@@ -1,0 +1,7 @@
+nnumpy
+pandas
+tensorflow
+cv2
+ultralytics
+requests
+streamlit
