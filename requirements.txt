@@ -1,7 +1,7 @@
 numpy
 pandas
 tensorflow
-cv2
+opencv-python
 ultralytics
 requests
 streamlit
