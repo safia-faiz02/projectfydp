@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
+import tensorflow as tf
 from PIL import Image
 import cv2
 from ultralytics import YOLO
@@ -10,7 +8,7 @@ from ultralytics import YOLO
 data = pd.read_csv('FINAL_COMBINED_DATASET_3CAP.csv')
 
 # tokenize the text
-tokenizer = Tokenizer()
+tokenizer = tf.keras.preprocessing.text.Tokenizer()
 tokenizer.fit_on_texts(data["urdu_caption"])
 vocab_size = len(tokenizer.word_index) + 1
 
@@ -32,7 +30,7 @@ def predict_caption(model, image, tokenizer, max_length):
         sequence = tokenizer.texts_to_sequences([in_text])[0]
         
         # pad the sequence
-        sequence = pad_sequences([sequence], max_length)
+        sequence = tf.keras.preprocessing.sequence.pad_sequences([sequence], max_length)
         
         # predict next word
         yhat = model.predict([image, sequence], verbose=0)
@@ -68,6 +66,6 @@ def generate_caption(image_name, model):
 
 
 def get_caption_model():
-    m = load_model('Trained_YOLO_LSTM_3c2e.h5')
+    m = tf.keras.models.load_model('Trained_YOLO_LSTM_3c2e.h5')
     return m
 
