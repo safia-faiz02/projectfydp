@@ -1,4 +1,4 @@
-nnumpy
+numpy
 pandas
 tensorflow
 cv2
